@@ -1,0 +1,877 @@
+{
+  "info": {
+    "_postman_id": "22b62eba-2c58-4abd-90aa-ced3b8455675",
+    "name": "OIDC",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "OdyseeAPIs Tests",
+      "item": [
+        {
+          "name": "X-AUTH-TOKEN",
+          "item": [
+            {
+              "name": "(IAPI) Sync Get",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = JSON.parse(responseBody);",
+                      "postman.setEnvironmentVariable(\"wallet_data\", jsonData.data.data);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{internal_apis_server}}/sync/get?auth_token={{auth_token}}&hash=db1306ce200daa0d90331b9007c90c1a0d92976c4138b0e8b638ae63965cf428",
+                  "host": [
+                    "{{internal_apis_server}}"
+                  ],
+                  "path": [
+                    "sync",
+                    "get"
+                  ],
+                  "query": [
+                    {
+                      "key": "auth_token",
+                      "value": "{{auth_token}}"
+                    },
+                    {
+                      "key": "hash",
+                      "value": "db1306ce200daa0d90331b9007c90c1a0d92976c4138b0e8b638ae63965cf428"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "(OAPI) Sync Apply",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Lbry-Auth-Token",
+                    "value": "{{auth_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\":null,\n    \"jsonrpc\":\"2.0\",\n    \"method\":\"sync_apply\",\n    \"params\": {\n        \"password\": \"\",\n        \"data\":\"{{wallet_data}}\"\n    }\n}"
+                },
+                "url": {
+                  "raw": "{{odysee_api_server}}/api/v1/proxy",
+                  "host": [
+                    "{{odysee_api_server}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "proxy"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "(OAPI) Wallet Balance",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Lbry-Auth-Token",
+                    "value": "{{auth_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\":null,\n    \"jsonrpc\":\"2.0\",\n    \"method\":\"wallet_balance\",\n    \"params\": {}\n}"
+                },
+                "url": {
+                  "raw": "{{odysee_api_server}}/api/v1/proxy",
+                  "host": [
+                    "{{odysee_api_server}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "proxy"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "(OAPI) Chanel List",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Lbry-Auth-Token",
+                    "value": "{{auth_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\":null,\n    \"jsonrpc\":\"2.0\",\n    \"method\":\"channel_list\",\n    \"params\": {}\n}"
+                },
+                "url": {
+                  "raw": "{{odysee_api_server}}/api/v1/proxy",
+                  "host": [
+                    "{{odysee_api_server}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "proxy"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "(OAPI) Claim List",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text",
+                    "disabled": true
+                  },
+                  {
+                    "key": "X-Lbry-Auth-Token",
+                    "value": "{{auth_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\":null,\n    \"jsonrpc\":\"2.0\",\n    \"method\":\"claim_list\",\n    \"params\": {}\n}"
+                },
+                "url": {
+                  "raw": "{{odysee_api_server}}/api/v1/proxy",
+                  "host": [
+                    "{{odysee_api_server}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "proxy"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "OAUTH-OIDC",
+          "item": [
+            {
+              "name": "Get Access Token",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = JSON.parse(responseBody);",
+                      "postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);",
+                      "postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "username",
+                      "value": "{{username}}",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{password}}",
+                      "type": "text"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "{{jwtClient}}",
+                      "type": "text"
+                    },
+                    {
+                      "key": "client_secret",
+                      "value": "{{jwtClientSecret}}",
+                      "type": "text"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "password",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{server}}/auth/realms/{{realm}}/protocol/openid-connect/token",
+                  "host": [
+                    "{{server}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "realms",
+                    "{{realm}}",
+                    "protocol",
+                    "openid-connect",
+                    "token"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "(IAPI) Sync Get",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = JSON.parse(responseBody);",
+                      "postman.setEnvironmentVariable(\"wallet_data\", jsonData.data.data);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{internal_apis_server}}/sync/get?hash=db1306ce200daa0d90331b9007c90c1a0d92976c4138b0e8b638ae63965cf428",
+                  "host": [
+                    "{{internal_apis_server}}"
+                  ],
+                  "path": [
+                    "sync",
+                    "get"
+                  ],
+                  "query": [
+                    {
+                      "key": "hash",
+                      "value": "db1306ce200daa0d90331b9007c90c1a0d92976c4138b0e8b638ae63965cf428"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "(OAPI) Sync Apply",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\":null,\n    \"jsonrpc\":\"2.0\",\n    \"method\":\"sync_apply\",\n    \"params\": {\n        \"password\": \"\",\n        \"data\":\"{{wallet_data}}\"\n    }\n}"
+                },
+                "url": {
+                  "raw": "{{odysee_api_server}}/api/v1/proxy",
+                  "host": [
+                    "{{odysee_api_server}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "proxy"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "(OAPI) Wallet Balance",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\":null,\n    \"jsonrpc\":\"2.0\",\n    \"method\":\"wallet_balance\",\n    \"params\": {}\n}"
+                },
+                "url": {
+                  "raw": "{{odysee_api_server}}/api/v1/proxy",
+                  "host": [
+                    "{{odysee_api_server}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "proxy"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "(OAPI) Chanel List",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\":null,\n    \"jsonrpc\":\"2.0\",\n    \"method\":\"channel_list\",\n    \"params\": {}\n}"
+                },
+                "url": {
+                  "raw": "{{odysee_api_server}}/api/v1/proxy",
+                  "host": [
+                    "{{odysee_api_server}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "proxy"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "(OAPI) Claim List",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\":null,\n    \"jsonrpc\":\"2.0\",\n    \"method\":\"claim_list\",\n    \"params\": {}\n}"
+                },
+                "url": {
+                  "raw": "{{odysee_api_server}}/api/v1/proxy",
+                  "host": [
+                    "{{odysee_api_server}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "proxy"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Internal APIs Tests",
+      "item": [
+        {
+          "name": "Get Access Token Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);",
+                  "postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "username",
+                  "value": "{{username}}",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "{{password}}",
+                  "type": "text"
+                },
+                {
+                  "key": "client_id",
+                  "value": "{{jwtClient}}",
+                  "type": "text"
+                },
+                {
+                  "key": "client_secret",
+                  "value": "{{jwtClientSecret}}",
+                  "type": "text"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{server}}/auth/realms/{{realm}}/protocol/openid-connect/token",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "auth",
+                "realms",
+                "{{realm}}",
+                "protocol",
+                "openid-connect",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "(IAPI) User Me",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{internal_apis_server}}/user/me",
+              "host": [
+                "{{internal_apis_server}}"
+              ],
+              "path": [
+                "user",
+                "me"
+              ],
+              "query": [
+                {
+                  "key": "auth_token",
+                  "value": "GZP5GmLRoe19GFHiF5R2f5s1euoPHeyG",
+                  "disabled": true
+                },
+                {
+                  "key": "auth_token",
+                  "value": "amv1P1NUmg862YDCRMnYaV7TVCo5TfPa",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "(IAPI) Reward List",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{internal_apis_server}}/reward/list",
+              "host": [
+                "{{internal_apis_server}}"
+              ],
+              "path": [
+                "reward",
+                "list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UserTag Edit",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{internal_apis_server}}/user_tag/edit",
+              "host": [
+                "{{internal_apis_server}}"
+              ],
+              "path": [
+                "user_tag",
+                "edit"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "File Block",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{internal_apis_server}}/file/tag",
+              "host": [
+                "{{internal_apis_server}}"
+              ],
+              "path": [
+                "file",
+                "tag"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "(IAPI) Status (admin only)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{internal_apis_server}}/status",
+              "host": [
+                "{{internal_apis_server}}"
+              ],
+              "path": [
+                "status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "openid-configuration",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{server}}/auth/realms/{{realm}}/.well-known/openid-configuration",
+          "host": [
+            "{{server}}"
+          ],
+          "path": [
+            "auth",
+            "realms",
+            "{{realm}}",
+            ".well-known",
+            "openid-configuration"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "JKWS",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{server}}/auth/realms/{{realm}}/.well-known/openid-configuration",
+          "host": [
+            "{{server}}"
+          ],
+          "path": [
+            "auth",
+            "realms",
+            "{{realm}}",
+            ".well-known",
+            "openid-configuration"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Access Token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = JSON.parse(responseBody);",
+              "postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);",
+              "postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "username",
+              "value": "{{username}}",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "{{password}}",
+              "type": "text"
+            },
+            {
+              "key": "client_id",
+              "value": "{{jwtClient}}",
+              "type": "text"
+            },
+            {
+              "key": "client_secret",
+              "value": "{{jwtClientSecret}}",
+              "type": "text"
+            },
+            {
+              "key": "grant_type",
+              "value": "password",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{server}}/auth/realms/{{realm}}/protocol/openid-connect/token",
+          "host": [
+            "{{server}}"
+          ],
+          "path": [
+            "auth",
+            "realms",
+            "{{realm}}",
+            "protocol",
+            "openid-connect",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Device Auth",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "client_id",
+              "value": "odysee-roku-unofficial",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{server}}/auth/realms/{{realm}}/device/auth",
+          "host": [
+            "{{server}}"
+          ],
+          "path": [
+            "auth",
+            "realms",
+            "{{realm}}",
+            "device",
+            "auth"
+          ],
+          "query": [
+            {
+              "key": "client_id",
+              "value": "odysee-roku-unofficial",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Certs",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "User Information Endpoint",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    }
+  ]
+}
